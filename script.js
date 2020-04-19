@@ -9,10 +9,21 @@ todoList = document.querySelector('.todo-list'),
 todoCompleted = document.querySelector('.todo-completed'),
 headerButton = document.querySelector('.header-button');
 
+let todoData = [];
+if (localStorage.getItem('memory')) {
+    todoData = JSON.parse(localStorage.getItem('memory'));
+}
+const renderItemUpdate = function () {
+    if (!todoData.todoList.length && !todoData.todoCompleted.length) return;
 
-const todoData = [];
-
-console.log(todoData);
+    for (let i = 0; i < todoData.todoList.length; i++) {
+        render(todoData.todoList[i]);
+    }
+    for (let i = 0; i < todoData.todoCompleted.length; i++) {
+        render(todoData.todoCompleted[i], true);
+    }      
+    
+};
 
 const render = function() {
     todoList.textContent = '';
@@ -37,27 +48,33 @@ const render = function() {
             render();
         });
         const todoRemove = li.querySelector('.todo-remove');
+        const itemRemove = function(elem) {
+            const item = elem.parentNode.parentNode;
+            const itemParent = item.parentNode;
+            const id = itemParent.id;
+            const text = item.textContent;
+    
+            todoData.splice(todoData.indexOf(text), 1);
+            itemParent.removeChild(item);
+            //localStorage.removeItem('memory'); - Возможно использовать этот метод?? 
+        };
         todoRemove.addEventListener('click', function(event) {
             event.preventDefault();
-            
-            todoRemove.remove(li) || localStorage.removeItem('memory');
-      
-            render();
+           itemRemove(event.target);
         });
         const showTodo = function() {  
             todoData.textContent = localStorage.getItem('memory');
 
         };
         headerButton.addEventListener('click', function() {
-            localStorage.setItem('memory', headerInput.value );
+            localStorage.setItem('memory', JSON.stringify(todoData));
+            console.log(localStorage.getItem('memory'));
            
         showTodo();
         });
         showTodo();
        
     });
-    
-
 
 };
 
