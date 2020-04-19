@@ -13,8 +13,8 @@
 <body>
 
 <header class="header">
-	<form class="todo-control">
-		<label><input class="header-input" type="text" placeholder="Какие планы?"></label>
+	<form class="todo-control" disabled>
+		<label><input class="header-input" type="text" placeholder="Какие планы?" required></label>
 		<button class="header-button" id="add"></button>
 	</form>
 </header>
@@ -22,25 +22,13 @@
 <div class="todo-container">
 
 	<ul class="todo todo-list" id="todo">
-		<li class="todo-item">
-			<span class="text-todo">Сварить кофе</span>
-			<div class="todo-buttons">
-				<button class="todo-remove"></button>
-				<button class="todo-complete"></button>
-			</div>
-		</li>
+		
 	</ul>
 	<ul class="todo todo-completed" id="completed">
-		<li class="todo-item">
-			<span class="text-todo">Помыть посуду</span>
-			<div class="todo-buttons">
-				<button class="todo-remove"></button>
-				<button class="todo-complete"></button>
-			</div>
-		</li>
+		
 	</ul>
 </div>
 
-
+<script src="script.js"></script>
 </body>
 </html>
