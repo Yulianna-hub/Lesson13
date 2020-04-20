@@ -13,7 +13,7 @@ const render = function() {
     todoList.textContent = '';
     todoCompleted.textContent = '';
 
-    todoData.forEach(function(item){
+    todoData.forEach(function(item, i){
         const li = document.createElement('li');
         li.classList.add('todo-item');
         li.innerHTML = '<span class="text-todo">' + item.value + '</span>'+
@@ -35,7 +35,7 @@ const render = function() {
         const todoRemove = li.querySelector('.todo-remove');
         const itemRemove = function(elem) {
             const text = li.textContent;
-            todoData.splice(todoData.indexOf(text), 1);
+            todoData.splice(i, 1);
             localStorage.setItem('memory', JSON.stringify(todoData));
             render();   
         };
